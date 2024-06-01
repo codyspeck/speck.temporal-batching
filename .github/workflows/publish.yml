@@ -11,11 +11,7 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
-      - name: Restore dependencies
-        run: dotnet restore src/**/*.csproj
-      - name: Build
-        run: dotnet build src/**/*.csproj --no-restore
       - name: Pack
-        run: dotnet pack src/**/*.csproj --no-build
+        run: dotnet pack src/**/*.csproj
       - name: Publish
         run: dotnet nuget push src/**/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} 
