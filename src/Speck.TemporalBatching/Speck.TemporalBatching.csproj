@@ -8,6 +8,7 @@
 
   <PropertyGroup>
     <PackageId>Speck.TemporalBatching</PackageId>
+    <PackageVersion>0.1.0</PackageVersion>
   </PropertyGroup>
   
   <ItemGroup>
