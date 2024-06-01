@@ -6,6 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>Speck.TemporalBatching</PackageId>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <InternalsVisibleTo Include="Speck.TemporalBatching.Tests" />
+  </ItemGroup>
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
   </ItemGroup>

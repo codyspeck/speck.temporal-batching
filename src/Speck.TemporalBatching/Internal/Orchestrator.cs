@@ -7,25 +7,22 @@ internal class Orchestrator : IOrchestrator
 {
     private readonly ConcurrentDictionary<Guid, TaskCompletionSource> _completions = new();
 
+    internal ICollection<Guid> Keys => _completions.Keys; // For testing purposes.
+    
     public TaskCompletionSource Add(Guid requestId)
     {
         var completion = new TaskCompletionSource();
 
         if (!_completions.TryAdd(requestId, completion))
-            throw new UnreachableException("Failed to add TaskCompletionSource to TemporalRequestOrchestrator.");
-
-        completion.Task.ContinueWith(_ =>
-        {
-            _completions.Remove(requestId, out var _);
-        });
-
+            throw new UnreachableException($"Failed to add {nameof(TaskCompletionSource)} to {nameof(Orchestrator)}.");
+        
         return completion;
     }
 
     public void Complete(Guid guid)
     {
-        if (!_completions.TryGetValue(guid, out var completion))
-            throw new UnreachableException("Attempting to complete unknown TaskCompletionSource.");
+        if (!_completions.TryRemove(guid, out var completion))
+            throw new UnreachableException($"Attempting to complete missing {nameof(TaskCompletionSource)}.");
 
         completion.TrySetResult();
     }

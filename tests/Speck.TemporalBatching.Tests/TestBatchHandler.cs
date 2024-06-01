@@ -4,10 +4,7 @@ internal class TestBatchHandler(TestRequestCollection collection) : IBatchHandle
 {
     public Task HandleAsync(IReadOnlyCollection<TestRequest> requests)
     {
-        foreach (var request in requests)
-        {
-            collection.Handle(request);
-        }
+        collection.Handle(requests);
         
         return Task.CompletedTask;
     }
